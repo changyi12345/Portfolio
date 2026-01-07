@@ -28,4 +28,10 @@ app.use('/admin', require('./routes/admin.routes'));
 app.use('/api/v1', require('./routes/api/portfolio.routes'));
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+// Only start server if run directly (local dev), otherwise export for Vercel
+if (require.main === module) {
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
+
+module.exports = app;
