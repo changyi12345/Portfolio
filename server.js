@@ -39,9 +39,14 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // Routes
-app.use('/', require('./routes/public.routes'));
+// app.use('/', require('./routes/public.routes')); // Disable EJS public routes
 app.use('/admin', require('./routes/admin.routes'));
 app.use('/api/v1', require('./routes/api/portfolio.routes'));
+
+// Serve React App for all other routes (SPA)
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 const PORT = process.env.PORT || 5000;
 
