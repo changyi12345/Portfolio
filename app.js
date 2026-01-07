@@ -50,6 +50,13 @@ app.get('*', (req, res) => {
         res.sendFile(indexPath);
     } else {
         console.error("Frontend build not found at:", indexPath);
+        // List files in public directory to debug
+        const publicDir = path.join(__dirname, 'public');
+        if (require('fs').existsSync(publicDir)) {
+             console.log("Files in public dir:", require('fs').readdirSync(publicDir));
+        } else {
+             console.log("Public dir does not exist");
+        }
         res.status(404).send("Frontend application is not built. Please check deployment logs.");
     }
 });
