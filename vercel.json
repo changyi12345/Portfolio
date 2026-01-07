@@ -1,6 +1,5 @@
 {
     "version": 2,
-    "outputDirectory": "public",
     "builds": [
         {
             "src": "package.json",
@@ -24,7 +23,8 @@
             "dest": "app.js"
         },
         {
-            "handle": "filesystem"
+            "src": "/(.*)",
+            "dest": "/index.html"
         }
     ],
     "env": {
