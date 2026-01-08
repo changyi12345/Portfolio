@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit About - Admin</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="admin-nav">
+            <div class="logo">Admin Panel</div>
+            <ul>
+                <li><a href="/admin/dashboard">Dashboard</a></li>
+                <li><a href="/admin/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="section-title">Edit About Info</h2>
+        
+        <div class="card">
+            <form action="/admin/about" method="POST">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" name="name" value="<%= about ? about.name : '' %>" required>
+                </div>
+                <div class="form-group">
+                    <label>Role</label>
+                    <input type="text" name="role" value="<%= about ? about.role : '' %>" required>
+                </div>
+                <div class="form-group">
+                    <label>Profile Image URL</label>
+                    <input type="text" name="profileImage" value="<%= about ? about.profileImage : '' %>">
+                </div>
+                <div class="form-group">
+                    <label>Bio</label>
+                    <textarea name="bio" rows="6" required><%= about ? about.bio : '' %></textarea>
+                </div>
+                <button type="submit" class="btn">Save Changes</button>
+                <a href="/admin/dashboard" class="btn btn-danger" style="margin-left: 10px;">Cancel</a>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

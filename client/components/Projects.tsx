@@ -70,7 +70,7 @@ export default function Projects() {
                             {/* Image Placeholder */}
                             <div className="h-48 bg-gray-800 relative overflow-hidden">
                                 {project.image ? (
-                                    <img src={`http://localhost:5000${project.image}`} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                    <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                                 ) : (
                                     <div className="w-full h-full bg-gray-700 group-hover:scale-110 transition-transform duration-500 flex items-center justify-center text-gray-500">
                                         No Image

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Skills - Admin</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="admin-nav">
+            <div class="logo">Admin Panel</div>
+            <ul>
+                <li><a href="/admin/dashboard">Dashboard</a></li>
+                <li><a href="/admin/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2 class="section-title">Manage Skills</h2>
+
+        <!-- Add Skill Form -->
+        <div class="card">
+            <h3>Add New Skill</h3>
+            <form action="/admin/skills" method="POST" style="display: flex; gap: 10px; align-items: flex-end;">
+                <div class="form-group" style="flex: 2; margin-bottom: 0;">
+                    <label>Skill Name</label>
+                    <input type="text" name="name" required placeholder="e.g. Node.js">
+                </div>
+                <div class="form-group" style="flex: 1; margin-bottom: 0;">
+                    <label>Level</label>
+                    <select name="level">
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate" selected>Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Add</button>
+            </form>
+        </div>
+
+        <!-- Skills List -->
+        <div class="grid">
+            <% skills.forEach(skill => { %>
+                <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <strong><%= skill.name %></strong>
+                        <br>
+                        <small style="color: #666;"><%= skill.level %></small>
+                    </div>
+                    <form action="/admin/skills/<%= skill._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Delete this skill?');">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            <% }) %>
+        </div>
+    </main>
+</body>
+</html>

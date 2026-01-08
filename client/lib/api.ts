@@ -1,11 +1,20 @@
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '/api/v1';
+
 export async function fetchAPI(endpoint: string) {
-    const res = await fetch(`http://localhost:5000/api/v1${endpoint}`, {
-        cache: 'no-store', // Ensure fresh data
-    });
-    
-    if (!res.ok) {
-        throw new Error(`Failed to fetch data from ${endpoint}`);
+    try {
+        const res = await fetch(`${API_BASE_URL}${endpoint}`, {
+            cache: 'no-store',
+        });
+        
+        if (!res.ok) {
+            // Return empty/default data instead of throwing to prevent page crash
+            console.error(`Failed to fetch ${endpoint}: ${res.statusText}`);
+            return [];
+        }
+        
+        return res.json();
+    } catch (error) {
+        console.error(`Error fetching ${endpoint}:`, error);
+        return []; // Return empty array as fallback
     }
-    
-    return res.json();
 }
